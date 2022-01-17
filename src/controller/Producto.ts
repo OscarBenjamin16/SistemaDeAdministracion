@@ -92,7 +92,7 @@ class ProductoController {
 			order = "ASC";
 		}
 		pagina = Number(pagina);
-		let take = 5;
+		let take = req.query.take || 5;
 		take = Number(take);
 		try {
 			const productoRepo = getRepository(Producto);
