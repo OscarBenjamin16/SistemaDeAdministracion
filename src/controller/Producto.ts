@@ -335,7 +335,7 @@ class ProductoController {
 		producto.proveedor = proveedor;
 		producto.marca = marca;
 		producto.categoria = categoria;
-		producto.status = true;
+		producto.status = false;
 
 		//validations
 		const ValidateOps = {
