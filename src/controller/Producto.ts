@@ -773,7 +773,7 @@ class ProductoController {
 	static AgregarProductoStock = async (req: Request, res: Response) => {
 		const { id } = res.locals.jwtPayload;
 		const { idp } = req.params;
-		const { cantidadProducto, precioCompra, beneficio } = req.body;
+		const { cantidadProducto, precioCompra, costo_standar } = req.body;
 
 		let producto: Producto;
 		let empleado: Employee;
@@ -807,24 +807,6 @@ class ProductoController {
 						message: "No se encontro resultado con el id: " + idp,
 					});
 				} else {
-					//declaracion porcentaje de ganancia mediante el mercado
-					let PorcentajeBeneficio = beneficio / 100;
-
-					//declaraciones de IVA
-					let PorcentajeTotal: number = 1.0;
-					let PorcentajeIVA: number = 0.13;
-					let TotalIva = PorcentajeTotal + PorcentajeIVA;
-
-					//generar precio de venta de acuerdo al precio de compra y margen de beneficio
-
-					let porcentaje = 1 - PorcentajeBeneficio;
-					let PorcentajeBeno = parseFloat(porcentaje.toFixed(2));
-
-					let CalcPrecioVenta = precioCompra / PorcentajeBeno;
-					let costo_standar = parseFloat(CalcPrecioVenta.toFixed(2));
-
-					//Obtener el precio sin IVA para posteriomente aplicar porcentaje de ganancia
-					//Intentar guardar cantidad producto
 					if (producto.catidad_por_unidad == 0) {
 						producto.catidad_por_unidad = cantidadProducto;
 						producto.precioCompra = precioCompra;
